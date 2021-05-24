@@ -1,0 +1,8 @@
+- hosts: all
+  become: true
+  become_user: root
+  tasks: 
+   - name: idempotent
+     copy: 
+      dest: /tmp/hosts1
+      content: "jnsnxksnckasncb\n" 

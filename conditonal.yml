@@ -1,0 +1,16 @@
+- hosts: all
+  become: true
+  become_user: root
+  vars: 
+   vfs: vsftpd
+  tasks:
+  - name: Install vsftpd rpm
+    yum: 
+     name: "{{ vfs }}"
+     state: present
+  - name: Start and enable the vsftpd  service
+    service:
+     name: "{{ vfs }}"
+     state: restarted
+     enabled: true
+    when: ansible_kernel == "3.10.0-862.el7.x86_64" 

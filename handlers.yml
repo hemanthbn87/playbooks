@@ -1,0 +1,25 @@
+- hosts: all
+  become: true
+  become_user: root
+  tasks:
+  - name: Install httpd service
+    yum:
+      name: httpd
+      state: latest
+  - name: Start the Services
+    service: 
+      name: httpd
+      state: started
+      enabled: true
+  - name: copying the file
+    copy:
+      src: /home/ansible/type
+      dest: /var/www/html/y
+    notify:
+     - test_srv
+  handlers:
+  - name: test_srv
+    service:
+     name: httpd
+     state: stopped
+  

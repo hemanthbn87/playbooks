@@ -1,0 +1,9 @@
+---
+ - hosts: database
+   become: true
+   become_user: root
+   become_method: sudo
+   tasks:
+    - name: start httpd service n
+      service: name=httpd state=started
+      

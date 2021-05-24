@@ -1,0 +1,7 @@
+- hosts: all
+  become: true
+  become_user: root
+  tasks: 
+   - name: Non idempotent
+     shell: echo "jnsnxksnckasnc" > /tmp/hosts1
+     

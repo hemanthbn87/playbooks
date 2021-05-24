@@ -1,0 +1,42 @@
+- hosts: all
+  become: true
+  become_user: root
+  tasks:
+  - name: Install httpd service
+    yum:
+      name: httpd
+      state: present
+  - name: Start and Enable httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+  - name: Install firewalld service
+    yum:
+      name: firewalld
+      state: present
+  - name: Start and Enable firewalld
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
+  - name: Permit Firewall
+    firewalld:
+      service: http
+      permanent: yes
+      state: enabled
+  - name: Create web page
+    copy:
+      content: "Welcome to Ansible World\n"
+      dest: /var/www/html/index.html
+  - name: Create Webserver name
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      line: "ServerName www.192.168.1.6:80\n"
+      insertafter: "#ServerName"
+  - name: Entry in host file
+    lineinfile:
+      path: /etc/hosts
+      line: "192.168.1.6 client.localdomain\n"
+  
+ 

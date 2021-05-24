@@ -1,0 +1,6 @@
+- hosts:
+  become: true
+  become_user: root
+  vars: 
+  tasks: 
+  - name: 

@@ -1,0 +1,16 @@
+- hosts: all
+  become: true
+  become_user: root
+  vars:
+   http_pkg: httpd
+   http_srv: httpd
+  tasks:
+  - name: Install the {{http_pkg}}
+    yum:
+       name: "{{http_pkg}}"
+       state: present
+  - name: Install the {{http_srv}}
+    service:
+       name: "{{ http_srv }}"
+       state: started
+       enabled: true 

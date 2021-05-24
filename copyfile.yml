@@ -1,0 +1,12 @@
+- hosts: all
+  become: true
+  become_user: root
+  tasks:
+   - name: Copy file from soruce to Destination
+     copy:
+      src: /etc/hosts1
+      dest: /tmp/
+      owner: ansible
+      group: root
+      mode: 000
+     when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '7'
